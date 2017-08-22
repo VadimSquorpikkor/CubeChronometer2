@@ -18,12 +18,13 @@ public class MainActivity extends AppCompatActivity {
     Session session;
     Chronometer chronometer;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        session = new Session();
+        session = new Session("10");
         chronometer = new Chronometer(this);
 
 

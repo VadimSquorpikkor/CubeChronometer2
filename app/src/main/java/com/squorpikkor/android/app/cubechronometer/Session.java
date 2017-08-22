@@ -8,9 +8,37 @@ import java.util.List;
  *
  */
 
-public class Session {
+class Session {
     private double slowest = 0;
     private double fastest;
+    private String name;
+
+    private double bestTime;
+    private double bestSessionTime;
+    private double averageTime;
+    private double leftTime;
+    private double iWishTime;
+
+    ArrayList<Double> doubleList;
+
+    ICanSave iCanSave;
+
+    private void doubleArray() {
+        doubleList.clear();
+        doubleList.add(bestTime);
+        doubleList.add(bestSessionTime);
+        doubleList.add(averageTime);
+        doubleList.add(leftTime);
+        doubleList.add(iWishTime);
+    }
+
+    void saveMe() {
+
+    }
+
+    Session(String name) {
+        this.name = name;
+    }
 
     private List<Double> timeList = new ArrayList<>();
 
@@ -27,7 +55,7 @@ public class Session {
     }
 
     public double simpleAverage(List list) {
-        return summa()/list.size();
+        return summa() / list.size();
     }
 
     public double advancedAverage() {
