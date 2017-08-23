@@ -1,5 +1,7 @@
 package com.squorpikkor.android.app.cubechronometer;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +21,11 @@ class Session {
     private double leftTime;
     private double iWishTime;
 
-    ArrayList<Double> doubleList;
+    private ArrayList<Double> doubleList;
 
-    ICanSave iCanSave;
+    private ICanSave iCanSave;
+
+    private Context context;
 
     private void doubleArray() {
         doubleList.clear();
@@ -33,11 +37,13 @@ class Session {
     }
 
     void saveMe() {
-
+       // iCanSave.saveDoubleArray(timeList, );
     }
 
-    Session(String name) {
+    Session(Context context, String name) {
         this.name = name;
+        iCanSave = new SaveLoad();
+        this.context = context;
     }
 
     private List<Double> timeList = new ArrayList<>();

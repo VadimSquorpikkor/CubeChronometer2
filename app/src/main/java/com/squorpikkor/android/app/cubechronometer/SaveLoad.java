@@ -4,14 +4,17 @@ package com.squorpikkor.android.app.cubechronometer;
 
 import android.content.SharedPreferences;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SaveLoad implements ICanSave{
 
     private final String SAVE_FIELD = "setting";
     private SharedPreferences preferences;
+    private HashMap<String, SharedPreferences> prefList;
 
-    /*private void saveStringArray(ArrayList<String> list) {//It should be own class, for better composition -- it can be using in another classes
+    /*void saveStringArray(ArrayList<String> list, ) {//It should be own class, for better composition -- it can be using in another classes
         saveStringArray(list, preferences);
     }*/
 
