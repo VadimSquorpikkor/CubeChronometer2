@@ -7,11 +7,11 @@ import android.content.SharedPreferences;
 import java.util.ArrayList;
 
 public interface ICanSave {
-    void saveStringArray(ArrayList<String> list, SharedPreferences preferences);
+    void saveStringArray(ArrayList<String> list, String prefName);
 
-    void loadStringArray(ArrayList<String> list, SharedPreferences preferences);
+    void loadStringArray(ArrayList<String> list, String prefName);
 
-    void saveDoubleArray(ArrayList<String> list, SharedPreferences preferences);
+    void saveDoubleArray(ArrayList<String> list, String prefName);
 
-    void loadDoubleArray(ArrayList<String> list, SharedPreferences preferences);
+    void loadDoubleArray(ArrayList<String> list, String prefName);
 }

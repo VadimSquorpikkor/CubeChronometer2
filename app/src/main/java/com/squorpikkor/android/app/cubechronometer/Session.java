@@ -27,6 +27,8 @@ class Session {
 
     private Context context;
 
+    private List<Double> timeList = new ArrayList<>();
+
     private void doubleArray() {
         doubleList.clear();
         doubleList.add(bestTime);
@@ -42,11 +44,10 @@ class Session {
 
     Session(Context context, String name) {
         this.name = name;
-        iCanSave = new SaveLoad();
+        iCanSave = new SaveLoad(context);
         this.context = context;
     }
 
-    private List<Double> timeList = new ArrayList<>();
 
     public List<Double> getTimeList() {
         return timeList;
