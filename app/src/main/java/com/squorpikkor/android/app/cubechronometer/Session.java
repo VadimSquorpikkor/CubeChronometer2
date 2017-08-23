@@ -27,7 +27,7 @@ class Session {
 
     private Context context;
 
-    private List<Double> timeList = new ArrayList<>();
+    private ArrayList<Double> timeList = new ArrayList<>();
 
     private void doubleArray() {
         doubleList.clear();
@@ -39,7 +39,7 @@ class Session {
     }
 
     void saveMe() {
-       // iCanSave.saveDoubleArray(timeList, );
+       iCanSave.saveDoubleArray(timeList, name);
     }
 
     Session(Context context, String name) {

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        session = new Session("10");
+        session = new Session(this, "10");
         chronometer = new Chronometer(this);
 
 

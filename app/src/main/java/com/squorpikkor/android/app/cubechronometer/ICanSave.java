@@ -11,7 +11,7 @@ public interface ICanSave {
 
     void loadStringArray(ArrayList<String> list, String prefName);
 
-    void saveDoubleArray(ArrayList<String> list, String prefName);
+    void saveDoubleArray(ArrayList<Double> list, String prefName);
 
-    void loadDoubleArray(ArrayList<String> list, String prefName);
+    void loadDoubleArray(ArrayList<Double> list, String prefName);
 }
