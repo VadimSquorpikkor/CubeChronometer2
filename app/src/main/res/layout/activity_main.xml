@@ -1,18 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.squorpikkor.android.app.cubechronometer.MainActivity">
+    android:orientation="vertical">
 
-    <TextView
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textSize="50sp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:text="@string/best_time"
+            android:id="@+id/textView16"
+            style="@style/small_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/the_best_average"
+            android:id="@+id/textView17"
+            style="@style/small_text"/>
+            <!--android:gravity="right" />-->
+
+        <TextView
+            android:text="@string/_50"
+            android:id="@+id/textView19"
+            style="@style/small_text"/>
+            <!--android:gravity="left"-->
+    </LinearLayout>
+
+    <!--<LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="13dp">
+    </LinearLayout>-->
+
+    <!--<LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/average_time"
+            android:id="@+id/textView"
+            style="@style/small_text" />
+
+        <TextView
+            android:text="@string/wish_time"
+            android:textColor="@color/green"
+            style="@style/small_text"
+            android:id="@+id/textView14" />
+
+        <TextView
+            android:text="@string/leftTime"
+            style="@style/small_text"
+            android:id="@+id/textView15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+
+        <TextView
+            style="@style/numbers"
+            android:id="@+id/textView11" />
+
+        <TextView
+            style="@style/numbers"
+            android:textColor="@color/green"
+            android:id="@+id/textView12"
+            android:text="@string/_50_2" />
+
+        <TextView
+            style="@style/numbers"
+            android:id="@+id/textView13"
+            />
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:baselineAligned="false"
+        android:layout_above="@+id/imageButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="43dp"
+        android:layout_marginBottom="26dp"
+        android:id="@+id/linearLayout2">
 
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:id="@+id/imageButton"
+        android:src="@drawable/green_but2"
+        android:layout_gravity="center_horizontal"
+        tools:layout_editor_absoluteY="304dp"
+        tools:layout_editor_absoluteX="92dp"
+        android:contentDescription="@string/button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton">
+
+        <TextView
+            android:id="@+id/time6"
+            style="@style/result_text" />
+
+        <TextView
+            android:id="@+id/time7"
+            style="@style/result_text" />
+
+        <TextView
+            android:id="@+id/time8"
+            style="@style/result_text" />
+
+        <TextView
+            android:id="@+id/time9"
+            style="@style/result_text" />
+
+        <TextView
+            android:id="@+id/time10"
+            style="@style/result_text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@+id/imageButton"
+        android:layout_alignStart="@+id/imageButton">
+
+        <TextView
+            android:id="@+id/time1"
+            style="@style/result_text" />
+
+        <TextView
+            android:id="@+id/time2"
+            style="@style/result_text" />
+
+        <TextView
+            android:id="@+id/time3"
+            style="@style/result_text" />
+
+        <TextView
+            android:id="@+id/time4"
+            style="@style/result_text" />
+
+        <TextView
+            android:id="@+id/time5"
+            style="@style/result_text" />
+
+
+    </LinearLayout>
+
+
+    <!--android:onClick="bigButtonClick"-->
+
+
+
+</RelativeLayout>

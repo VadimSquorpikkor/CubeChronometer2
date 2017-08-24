@@ -3,6 +3,7 @@ package com.squorpikkor.android.app.cubechronometer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Chronometer;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
@@ -10,13 +11,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-/**
- * Activity for 10 time competition
- * */
+    /**
+     * Activity for 10 time competition
+     */
 
-    ArrayList<TextView> timeTextList= new ArrayList<>();
+    ArrayList<TextView> timeTextList;
     Session session;
     Chronometer chronometer;
+
+    ImageButton imageButton;
 
 
     @Override
@@ -24,10 +27,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        timeTextList = new ArrayList<>();
         session = new Session(this, "10");
         chronometer = new Chronometer(this);
+        imageButton = (ImageButton) findViewById(R.id.imageButton);
 
-
+        timeTextList.add((TextView) findViewById(R.id.time1));
+        timeTextList.add((TextView) findViewById(R.id.time2));
+        timeTextList.add((TextView) findViewById(R.id.time3));
+        timeTextList.add((TextView) findViewById(R.id.time4));
+        timeTextList.add((TextView) findViewById(R.id.time5));
+        timeTextList.add((TextView) findViewById(R.id.time6));
+        timeTextList.add((TextView) findViewById(R.id.time7));
+        timeTextList.add((TextView) findViewById(R.id.time8));
+        timeTextList.add((TextView) findViewById(R.id.time9));
+        timeTextList.add((TextView) findViewById(R.id.time10));
     }
 
 
@@ -39,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
             count++;
         }
     }
-
 
 
 }
