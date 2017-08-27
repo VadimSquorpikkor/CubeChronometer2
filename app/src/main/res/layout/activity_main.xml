@@ -7,7 +7,7 @@
 
     <Chronometer
         android:id="@+id/chronometer"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true"
@@ -96,7 +96,7 @@
             />
     </LinearLayout>-->
 
-    <LinearLayout
+    <!--<LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,14 +109,15 @@
         android:layout_marginBottom="26dp"
         android:id="@+id/linearLayout2">
 
-    </LinearLayout>
+    </LinearLayout>-->
 
+    <!-- BIG BUTTON -->
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/grey"
         android:id="@+id/imageButton"
-        android:src="@drawable/green_but2"
+        android:src="@drawable/big_green"
         android:layout_gravity="center_horizontal"
         tools:layout_editor_absoluteY="304dp"
         tools:layout_editor_absoluteX="92dp"
@@ -124,6 +125,37 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <!-- LEFT TIMES -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@+id/imageButton"
+        android:layout_alignStart="@+id/imageButton">
+
+        <TextView
+            android:id="@+id/time1"
+            style="@style/result_text" />
+
+        <TextView
+            android:id="@+id/time2"
+            style="@style/result_text" />
+
+        <TextView
+            android:id="@+id/time3"
+            style="@style/result_text" />
+
+        <TextView
+            android:id="@+id/time4"
+            style="@style/result_text" />
+
+        <TextView
+            android:id="@+id/time5"
+            style="@style/result_text" />
+
+    </LinearLayout>
+
+    <!-- RIGHT TIMES -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -153,38 +185,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_above="@+id/imageButton"
-        android:layout_alignStart="@+id/imageButton">
-
-        <TextView
-            android:id="@+id/time1"
-            style="@style/result_text" />
-
-        <TextView
-            android:id="@+id/time2"
-            style="@style/result_text" />
-
-        <TextView
-            android:id="@+id/time3"
-            style="@style/result_text" />
-
-        <TextView
-            android:id="@+id/time4"
-            style="@style/result_text" />
-
-        <TextView
-            android:id="@+id/time5"
-            style="@style/result_text" />
-
-
-    </LinearLayout>
-
-
-    <!--android:onClick="bigButtonClick"-->
 
 
 

@@ -1,7 +1,10 @@
 package com.squorpikkor.android.app.cubechronometer;
 
+import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
@@ -15,13 +18,25 @@ public class MainActivity extends AppCompatActivity {
      * Activity for 10 time competition
      */
 
+    public static final String TAG = "LOG!!";
+
     ArrayList<TextView> timeTextList;
     Session session;
     Chronometer chronometer;
 
-    ImageButton bigButton;
+    ImageButton imageButton;
+    BigButton bigButton;
 
     ICanTranslate iCanTranslate;
+
+    Controller controller;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        bigButton.freezeIt(imageButton);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +45,15 @@ public class MainActivity extends AppCompatActivity {
 
         timeTextList = new ArrayList<>();
         session = new Session(this, "10");
-        chronometer = new Chronometer(this);
-        bigButton = (ImageButton) findViewById(R.id.imageButton);
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
+
+
+        imageButton = (ImageButton) findViewById(R.id.imageButton);
+        bigButton = new BigButton();
 
         iCanTranslate = new Translator(this);
+
+        controller = new Controller(chronometer);
 
         timeTextList.add((TextView) findViewById(R.id.time1));
         timeTextList.add((TextView) findViewById(R.id.time2));
@@ -51,17 +71,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.imageButton:
+                        bigButton.tapIt(imageButton);
+                        Log.e(TAG, "onClick: buttonPressed");
+                        controller.methodRequesting(bigButton.getCommand());//Do method which name button requesting
 
 
                 }
             }
         };
 
-        bigButton.setOnClickListener(listener);
+        imageButton.setOnClickListener(listener);
     }
 
 
-    void showTimes () {
+    void showTimes() {
         iCanTranslate.showTimes(timeTextList);
     }
 
