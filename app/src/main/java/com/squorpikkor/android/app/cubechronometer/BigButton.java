@@ -3,6 +3,9 @@ package com.squorpikkor.android.app.cubechronometer;
 import android.util.Log;
 import android.widget.ImageButton;
 
+import static com.squorpikkor.android.app.cubechronometer.Controller.RESUME;
+import static com.squorpikkor.android.app.cubechronometer.Controller.START;
+import static com.squorpikkor.android.app.cubechronometer.Controller.STOP;
 import static com.squorpikkor.android.app.cubechronometer.MainActivity.TAG;
 
 /**
@@ -12,14 +15,12 @@ import static com.squorpikkor.android.app.cubechronometer.MainActivity.TAG;
 
 class BigButton {
 
-    private final String GREEN = "green";
-    private final String RED = "red";
-    private final String PAUSED = "paused";
+    public static final String GREEN = "green";
+    public static final String RED = "red";
+    public static final String BLUE = "paused";
 
     private String command;
-    public static final String START = "start";
-    public static final String STOP = "stop";
-    public static final String RESUME = "resume";
+
 
     private String condition;
 
@@ -51,8 +52,8 @@ class BigButton {
                 imageButton.setImageResource(R.drawable.big_green);
                 command = STOP;
                 break;
-            case PAUSED:
-                Log.e(TAG, "tapIt: onCase Paused");
+            case BLUE:
+                Log.e(TAG, "tapIt: onCase Blue");
                 //resume chronometer
                 condition = RED;
                 imageButton.setImageResource(R.drawable.big_red);
@@ -63,7 +64,7 @@ class BigButton {
     }
 
     void freezeIt(ImageButton imageButton) {
-        condition = PAUSED;
+        condition = BLUE;
         imageButton.setImageResource(R.drawable.big_blue);
     }
 
@@ -75,4 +76,7 @@ class BigButton {
         return command;
     }
 
+    String getCondition() {
+        return condition;
+    }
 }

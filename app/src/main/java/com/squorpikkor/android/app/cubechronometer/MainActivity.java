@@ -1,7 +1,5 @@
 package com.squorpikkor.android.app.cubechronometer;
 
-import android.os.SystemClock;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +10,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.squorpikkor.android.app.cubechronometer.BigButton.BLUE;
+import static com.squorpikkor.android.app.cubechronometer.Controller.PAUSE;
+import static com.squorpikkor.android.app.cubechronometer.Controller.SHOW_TIMES;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "LOG!!";
 
     ArrayList<TextView> timeTextList;
-    Session session;
+    //Session session;
     Chronometer chronometer;
 
     ImageButton imageButton;
@@ -35,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        bigButton.freezeIt(imageButton);
+        if (bigButton.getCondition().equals(BLUE)) {
+            bigButton.freezeIt(imageButton);
+            controller.getMethod(PAUSE);
+        }
+
     }
 
     @Override
@@ -44,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         timeTextList = new ArrayList<>();
-        session = new Session(this, "10");
+        //session = new Session(this, "10");
         chronometer = (Chronometer) findViewById(R.id.chronometer);
 
 
@@ -53,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         iCanTranslate = new Translator(this);
 
-        controller = new Controller(chronometer);
+        controller = new Controller(this, chronometer);
 
         timeTextList.add((TextView) findViewById(R.id.time1));
         timeTextList.add((TextView) findViewById(R.id.time2));
@@ -73,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.imageButton:
                         bigButton.tapIt(imageButton);
                         Log.e(TAG, "onClick: buttonPressed");
-                        controller.methodRequesting(bigButton.getCommand());//Do method which name button requesting
+                        controller.getMethod(bigButton.getCommand());//Do method which name button requesting
 
 
                 }
@@ -84,9 +90,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    void showTimes() {
-        iCanTranslate.showTimes(timeTextList);
+    void showTime() {
+        controller.getMethod(SHOW_TIMES, timeTextList);
     }
+
+    /*void showTimes() {
+        iCanTranslate.showTimes(timeTextList);
+    }*/
 
     /*public void showTimes() {
         int count = 0;
