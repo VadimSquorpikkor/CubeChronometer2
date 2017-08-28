@@ -9,10 +9,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.squorpikkor.android.app.cubechronometer.BigButton.BLUE;
 import static com.squorpikkor.android.app.cubechronometer.Controller.PAUSE;
-import static com.squorpikkor.android.app.cubechronometer.Controller.SHOW_TIMES;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,13 +23,13 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "LOG!!";
 
     ArrayList<TextView> timeTextList;
-    //Session session;
+    ArrayList<TextView> valueTextList;
+    HashMap<String, TextView> valueTextMap;
+
     Chronometer chronometer;
 
     ImageButton imageButton;
     BigButton bigButton;
-
-    ICanTranslate iCanTranslate;
 
     Controller controller;
 
@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
             bigButton.freezeIt(imageButton);
             controller.getMethod(PAUSE);
         }
-
     }
 
     @Override
@@ -50,14 +49,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         timeTextList = new ArrayList<>();
-        //session = new Session(this, "10");
-        chronometer = (Chronometer) findViewById(R.id.chronometer);
+        valueTextList = new ArrayList<>();
+        valueTextMap = new HashMap<>();
 
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
 
         imageButton = (ImageButton) findViewById(R.id.imageButton);
         bigButton = new BigButton();
-
-        iCanTranslate = new Translator(this);
 
         controller = new Controller(this, chronometer, timeTextList);
 
@@ -72,6 +70,14 @@ public class MainActivity extends AppCompatActivity {
         timeTextList.add((TextView) findViewById(R.id.time9));
         timeTextList.add((TextView) findViewById(R.id.time10));
 
+        valueTextList.add((TextView)findViewById(R.id.best_time_value));
+        valueTextList.add((TextView)findViewById(R.id.best_average_value));
+        valueTextList.add((TextView)findViewById(R.id.average_time_value));
+        valueTextList.add((TextView)findViewById(R.id.wish_time_value));
+        valueTextList.add((TextView)findViewById(R.id.left_time_value));
+
+        //valueTextMap.put(best)
+
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,33 +86,11 @@ public class MainActivity extends AppCompatActivity {
                         bigButton.tapIt(imageButton);
                         Log.e(TAG, "onClick: buttonPressed");
                         controller.getMethod(bigButton.getCommand());//Do method which name button requesting
-                        //controller.getMethod(SHOW_TIMES, timeTextList);
-
-
                 }
             }
         };
 
         imageButton.setOnClickListener(listener);
     }
-
-
-    /*void showTime() {
-        controller.getMethod(SHOW_TIMES, timeTextList);
-    }*/
-
-    /*void showTimes() {
-        iCanTranslate.showTimes(timeTextList);
-    }*/
-
-    /*public void showTimes() {
-        int count = 0;
-        ArrayList<Double> list = new ArrayList<>(session.getTimeList());
-        for (TextView textView : timeTextList) {
-            textView.setText(String.valueOf(list.get(count)));
-            count++;
-        }
-    }*/
-
 
 }

@@ -1,6 +1,5 @@
 package com.squorpikkor.android.app.cubechronometer;
 
-import android.content.Context;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -10,22 +9,15 @@ import java.util.ArrayList;
  * Translator class for send data between activity and Session
  */
 
-class Translator implements ICanTranslate {
+class Translator{
 
-    private Context context;
-    private Session session = new Session(context, 10);
-
-    Translator(Context context) {
-        this.context = context;
-    }
-
-    @Override
-    public void showTimes(ArrayList<TextView> textViewList) {
+    void ArrayToText(ArrayList<Double> fromArray, ArrayList<TextView> toTextView) {
         int count = 0;
-        ArrayList<Double> list = new ArrayList<>(session.getTimeList());
-        for (TextView textView : textViewList) {
-            textView.setText(String.valueOf(list.get(count)));
+        for (Double d : fromArray) {
+            toTextView.get(count).setText(String.valueOf(d));
             count++;
         }
     }
+
+
 }

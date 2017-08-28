@@ -2,13 +2,10 @@ package com.squorpikkor.android.app.cubechronometer;
 
 import android.content.Context;
 import android.os.SystemClock;
-import android.util.Log;
 import android.widget.Chronometer;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Vadim on 27.08.2017.
@@ -25,18 +22,18 @@ class Controller {
 
     private Chronometer chronometer;
     private long stoppedTime = 0;
-    //    private Context context;
-    private Translator translator;
 
     static final String START = "start";
     static final String STOP = "stop";
     static final String RESUME = "resume";
     static final String PAUSE = "pause";
     static final String SHOW_TIMES = "show_times";
+    static final String END_OF_GAME = "end_of_game";
+    static final String SHOW_VALUES = "show_values";
 
 
     private Session session;
-
+    private Translator translator;
     private ArrayList<TextView> timeList;
 
     /*Controller(Context context, Chronometer chronometer) {
@@ -45,11 +42,16 @@ class Controller {
         translator = new Translator(context);
     }*/
 
+    /**
+     * Idea is -- session size depends only of timeList size,
+     * so i don't need to think of what size it should be --
+     * session automatically get the right size
+     */
     Controller(Context context, Chronometer chronometer, ArrayList<TextView> timeList) {
         this.chronometer = chronometer;
         this.timeList = timeList;
         session = new Session(context, timeList.size());
-        translator = new Translator(context);
+        translator = new Translator();
     }
 
     /*Controller(HashMap<String, Object> paramList) {
@@ -83,6 +85,7 @@ class Controller {
                 long sec = (elapsedMillis / 1000);
                 session.addTime(sec);
                 getMethod(SHOW_TIMES);
+                if(session.isEnds)getMethod(END_OF_GAME);
                 break;
             case RESUME:
                 chronometer.setBase(SystemClock.elapsedRealtime() + stoppedTime);
@@ -93,19 +96,25 @@ class Controller {
                 chronometer.stop();
                 break;
             case SHOW_TIMES:
-                showTimes(timeList);
+                translator.ArrayToText(session.getTimeList(), timeList);
+                break;
+            case END_OF_GAME:
+
+                break;
+            case SHOW_VALUES:
+
                 break;
 
 
         }
     }
 
-    public void showTimes(ArrayList<TextView> textViewList) {
+    /*private void showTimes(ArrayList<TextView> textViewList) {
         int count = 0;
         ArrayList<Double> list = new ArrayList<>(session.getTimeList());
         for (Double d : list) {
             textViewList.get(count).setText(String.valueOf(d));
             count++;
         }
-    }
+    }*/
 }
