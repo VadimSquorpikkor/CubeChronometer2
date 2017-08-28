@@ -13,7 +13,7 @@ import java.util.ArrayList;
 class Translator implements ICanTranslate {
 
     private Context context;
-    private Session session = new Session(context, "10");
+    private Session session = new Session(context, 10);
 
     Translator(Context context) {
         this.context = context;

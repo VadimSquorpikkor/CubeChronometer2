@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         iCanTranslate = new Translator(this);
 
-        controller = new Controller(this, chronometer);
+        controller = new Controller(this, chronometer, timeTextList);
 
         timeTextList.add((TextView) findViewById(R.id.time1));
         timeTextList.add((TextView) findViewById(R.id.time2));
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         bigButton.tapIt(imageButton);
                         Log.e(TAG, "onClick: buttonPressed");
                         controller.getMethod(bigButton.getCommand());//Do method which name button requesting
+                        //controller.getMethod(SHOW_TIMES, timeTextList);
 
 
                 }
@@ -90,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    void showTime() {
+    /*void showTime() {
         controller.getMethod(SHOW_TIMES, timeTextList);
-    }
+    }*/
 
     /*void showTimes() {
         iCanTranslate.showTimes(timeTextList);

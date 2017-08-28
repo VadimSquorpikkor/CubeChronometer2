@@ -14,6 +14,7 @@ class Session {
     private double slowest = 0;
     private double fastest;
     private String name;
+    private int size;
 
     private double bestTime;
     private double bestSessionTime;
@@ -42,12 +43,16 @@ class Session {
        iCanSave.saveDoubleArray(timeList, name);
     }
 
-    Session(Context context, String name) {
-        this.name = name;
+    Session(Context context, int size) {
+        //this.name = name;
+        this.size = size;
         iCanSave = new SaveLoad(context);
         this.context = context;
     }
 
+    /*void resetSession() {
+        for
+    }*/
 
     public List<Double> getTimeList() {
         return timeList;
@@ -89,4 +94,7 @@ class Session {
         timeList.add(time);
     }
 
+    public int getSize() {
+        return size;
+    }
 }
