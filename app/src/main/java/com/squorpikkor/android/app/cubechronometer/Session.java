@@ -1,9 +1,12 @@
 package com.squorpikkor.android.app.cubechronometer;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Vadim on 20.08.2017.
@@ -13,32 +16,41 @@ import java.util.List;
 class Session {
     private double slowest = 0;
     private double fastest;
-    private String name;
     private int sessionSize;
     boolean isEnds = false;
+    private double wishTime = 50;
 
+    public double getWishTime() {
+        return wishTime;
+    }
+
+    public void setWishTime(double wishTime) {
+        this.wishTime = wishTime;
+    }
 
     static final String BEST_TIME = "best_time";
     static final String BEST_AVERAGE_TIME = "best_average_time";
     static final String AVERAGE_TIME = "average_time";
     static final String ADVANCED_AVERAGE_TIME = "advanced_average_time";
     static final String WISH_TIME = "wish_time";
-    static final String MAX_TIME = "max_time";
-
+    static final String LEFT_TIME = "left_time";
+/*
     private double bestTime;
     private double bestSessionTime;
     private double averageTime;
     private double leftTime;
-    private double iWishTime;
+    private double iWishTime;*/
 
     private ICanSave iCanSave;
 
     private Context context;
 
     private ArrayList<Double> timeList = new ArrayList<>();
-    private ArrayList<Double> doubleList = new ArrayList<>();
 
-    private ArrayList<Double> getDoubleArray() {
+
+//    private ArrayList<Double> doubleList = new ArrayList<>();
+
+  /*  private ArrayList<Double> getDoubleArray() {
         doubleList.clear();
         doubleList.add(bestTime);
         doubleList.add(bestSessionTime);
@@ -47,15 +59,15 @@ class Session {
         doubleList.add(iWishTime);
         return doubleList;
     }
-
+*/
 
     void saveMe() {
-        iCanSave.saveDoubleArray(timeList, name);
+        iCanSave.saveDoubleArray(timeList, String.valueOf(sessionSize));
     }
 
     Session(Context context, int size) {
         //this.name = name;
-        this.sessionSize = size;
+        sessionSize = size;
         iCanSave = new SaveLoad(context);
         this.context = context;
     }
@@ -76,12 +88,16 @@ class Session {
         return sum;
     }
 
-    public double simpleAverage(List list) {
+    double simpleAverage() {
+        return summa() / timeList.size();
+    }
+
+    private double simpleAverage(ArrayList<Double> list) {
         return summa() / list.size();
     }
 
     public double advancedAverage() {
-        List<Double> list = new ArrayList<>(timeList);
+        ArrayList<Double> list = new ArrayList<>(timeList);
         for (double d : list) {
             if (d == fastest) {
                 list.remove(d);
@@ -91,6 +107,15 @@ class Session {
             }
         }
         return simpleAverage(list);
+    }
+
+    double leftTime() {
+        Log.e(TAG, "leftTime: session: " + sessionSize + ", timeList: " + timeList.size() + ", summa: " + summa());
+        double d = 0;
+        if (sessionSize != timeList.size()) {
+            d = (sessionSize*wishTime-summa())/(sessionSize-timeList.size());
+        }
+        return d;
     }
 
     void addTime(double time) {

@@ -11,12 +11,18 @@ import java.util.ArrayList;
 
 class Translator{
 
-    void ArrayToText(ArrayList<Double> fromArray, ArrayList<TextView> toTextView) {
+    void arrayToText(ArrayList<Double> fromArray, ArrayList<TextView> toTextView) {
         int count = 0;
         for (Double d : fromArray) {
             toTextView.get(count).setText(String.valueOf(d));
             count++;
         }
+    }
+
+    void valueToText(Double fromValue, TextView toText) {
+        //String s = String.valueOf(fromValue);
+        String s = String.format("%.2f", fromValue);
+        toText.setText(s);
     }
 
 
