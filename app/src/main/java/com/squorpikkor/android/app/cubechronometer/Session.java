@@ -1,12 +1,7 @@
 package com.squorpikkor.android.app.cubechronometer;
 
 import android.content.Context;
-import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Vadim on 20.08.2017.
@@ -110,7 +105,6 @@ class Session {
     }
 
     double leftTime() {
-        Log.e(TAG, "leftTime: session: " + sessionSize + ", timeList: " + timeList.size() + ", summa: " + summa());
         double d = 0;
         if (sessionSize != timeList.size()) {
             d = (sessionSize*wishTime-summa())/(sessionSize-timeList.size());

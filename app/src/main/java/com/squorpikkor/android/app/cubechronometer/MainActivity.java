@@ -2,7 +2,9 @@ package com.squorpikkor.android.app.cubechronometer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
@@ -19,7 +21,7 @@ import static com.squorpikkor.android.app.cubechronometer.Session.BEST_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.LEFT_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.WISH_TIME;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     /**
      * Activity for 10 time competition
@@ -34,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     Chronometer chronometer;
 
     ImageButton imageButton;
+    ImageButton settingsButton;
+    ImageButton infoButton;
+
     BigButton bigButton;
 
     Controller controller;
@@ -62,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         imageButton = (ImageButton) findViewById(R.id.imageButton);
         bigButton = new BigButton();
 
+        settingsButton = (ImageButton) findViewById(R.id.settings);
+        infoButton = (ImageButton)findViewById(R.id.info);
 
         timeTextList.add((TextView) findViewById(R.id.time1));
         timeTextList.add((TextView) findViewById(R.id.time2));
@@ -86,9 +93,7 @@ public class MainActivity extends AppCompatActivity {
         valueTextMap.put(WISH_TIME, (TextView)findViewById(R.id.wish_time_value));
         valueTextMap.put(LEFT_TIME, (TextView)findViewById(R.id.left_time_value));
 
-        controller = new Controller(this, chronometer, timeTextList, valueTextMap);
-
-        //valueTextMap.put(best)
+        controller = new Controller(this, chronometer, timeTextList, valueTextMap, imageButton);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -98,11 +103,22 @@ public class MainActivity extends AppCompatActivity {
                         bigButton.tapIt(imageButton);
                         Log.e(TAG, "onClick: buttonPressed");
                         controller.getMethod(bigButton.getCommand());//Do method which name button requesting
+                        break;
+                    case R.id.settings:
+                        showPopup(v);
+                        break;
                 }
             }
         };
 
         imageButton.setOnClickListener(listener);
+        settingsButton.setOnClickListener(listener);
     }
 
+    public void showPopup(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.main, popup.getMenu());
+        popup.show();
+    }
 }

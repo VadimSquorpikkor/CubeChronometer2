@@ -1,0 +1,40 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity" >
+
+    <item android:id="@+id/menu_about"
+        android:title="@string/menu_about"
+        android:orderInCategory="7"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/menu_restart"
+        android:title="@string/menu_restart"
+        android:orderInCategory="6"
+        app:showAsAction="never" />
+
+    <!--<item android:id="@+id/menu_retry"
+        android:title="@string/menu_retry"
+        android:orderInCategory="1"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/menu_max_att"
+        android:title="@string/menu_max_att"
+        android:orderInCategory="2"
+        app:showAsAction="never" />-->
+
+    <item android:id="@+id/menu_set_average"
+        android:title="@string/menu_set_average"
+        android:orderInCategory="3"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/menu_min_time"
+        android:title="@string/menu_min_time"
+        android:orderInCategory="4"
+        app:showAsAction="never" />
+
+    <!--<item android:id="@+id/menu_min_average_time"
+        android:title="@string/menu_min_average_time"
+        android:orderInCategory="5"
+        app:showAsAction="never" />-->
+</menu>
