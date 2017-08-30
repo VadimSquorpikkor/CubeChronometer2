@@ -2,8 +2,11 @@ package com.squorpikkor.android.app.cubechronometer;
 
 import android.content.Context;
 import android.os.SystemClock;
+import android.view.MenuInflater;
+import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +26,8 @@ class Controller {
     private long stoppedTime = 0;
     Context context;
 
+    PopupMenu popup;
+
     static final String START = "start";
     static final String STOP = "stop";
     static final String RESUME = "resume";
@@ -31,7 +36,7 @@ class Controller {
     private static final String SHOW_TIMES = "show_times";
     private static final String END_OF_GAME = "end_of_game";
     private static final String SHOW_AVERAGE_AND_LEFT_TIME = "show_values";
-    private static final String START_THE_GAME = "start_the_game";
+    static final String START_THE_GAME = "start_the_game";
     private static final String LOOSER = "looser";
     private static final String RECORD = "record";
 
@@ -105,4 +110,15 @@ class Controller {
         }
     }
 
+    void showMenu(View v) {
+        popup =
+                new PopupMenu(context, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.main, popup.getMenu());
+        popup.show();
+    }
+
+    void showInfo(String infoText) {
+
+    }
 }

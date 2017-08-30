@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 import static com.squorpikkor.android.app.cubechronometer.BigButton.BLUE;
 import static com.squorpikkor.android.app.cubechronometer.Controller.PAUSE;
+import static com.squorpikkor.android.app.cubechronometer.Controller.START_THE_GAME;
 import static com.squorpikkor.android.app.cubechronometer.Session.AVERAGE_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.BEST_AVERAGE_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.BEST_TIME;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity{
 
     public static final String TAG = "LOG!!";
 
+    final String INFO_TEXT = "@string/info_text_for_10_times";//!!!!!sdelat
+
     ArrayList<TextView> timeTextList;
     ArrayList<TextView> valueTextList;
     HashMap<String, TextView> valueTextMap;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity{
     ImageButton imageButton;
     ImageButton settingsButton;
     ImageButton infoButton;
+    ImageButton restartButton;
 
     BigButton bigButton;
 
@@ -65,6 +69,9 @@ public class MainActivity extends AppCompatActivity{
         chronometer = (Chronometer) findViewById(R.id.chronometer);
 
         imageButton = (ImageButton) findViewById(R.id.imageButton);
+        infoButton = (ImageButton) findViewById(R.id.info);
+        restartButton = (ImageButton) findViewById(R.id.restart);
+        settingsButton = (ImageButton) findViewById(R.id.settings);
         bigButton = new BigButton();
 
         settingsButton = (ImageButton) findViewById(R.id.settings);
@@ -105,20 +112,26 @@ public class MainActivity extends AppCompatActivity{
                         controller.getMethod(bigButton.getCommand());//Do method which name button requesting
                         break;
                     case R.id.settings:
-                        showPopup(v);
+                        controller.showMenu(v);
                         break;
+                    case R.id.info:
+                        controller.showInfo(INFO_TEXT);
+                    case R.id.restart:
+                        controller.getMethod(START_THE_GAME);
                 }
             }
         };
 
         imageButton.setOnClickListener(listener);
         settingsButton.setOnClickListener(listener);
+        infoButton.setOnClickListener(listener);
+        restartButton.setOnClickListener(listener);
     }
 
-    public void showPopup(View v) {
+    /*public void showMenu(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.main, popup.getMenu());
         popup.show();
-    }
+    }*/
 }
