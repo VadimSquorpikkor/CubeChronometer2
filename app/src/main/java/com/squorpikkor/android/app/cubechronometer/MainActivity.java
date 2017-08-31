@@ -1,5 +1,7 @@
 package com.squorpikkor.android.app.cubechronometer;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -112,10 +114,11 @@ public class MainActivity extends AppCompatActivity{
                         controller.getMethod(bigButton.getCommand());//Do method which name button requesting
                         break;
                     case R.id.settings:
-                        controller.showMenu(v);
+                        controller.showMenu(MainActivity.this, v);
                         break;
                     case R.id.info:
-                        controller.showInfo(INFO_TEXT);
+                        //controller.showInfo(INFO_TEXT);
+                        controller.theEndOfGameAlert(MainActivity.this);
                     case R.id.restart:
                         controller.getMethod(START_THE_GAME);
                 }
@@ -128,10 +131,12 @@ public class MainActivity extends AppCompatActivity{
         restartButton.setOnClickListener(listener);
     }
 
-    /*public void showMenu(View v) {
+    public void showMenu(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.main, popup.getMenu());
         popup.show();
-    }*/
+    }
+
+
 }

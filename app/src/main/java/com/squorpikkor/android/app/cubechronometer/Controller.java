@@ -1,7 +1,9 @@
 package com.squorpikkor.android.app.cubechronometer;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.SystemClock;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Chronometer;
@@ -110,9 +112,8 @@ class Controller {
         }
     }
 
-    void showMenu(View v) {
-        popup =
-                new PopupMenu(context, v);
+    void showMenu(Context con, View v) {
+        popup = new PopupMenu(con, v);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.main, popup.getMenu());
         popup.show();
@@ -121,4 +122,26 @@ class Controller {
     void showInfo(String infoText) {
 
     }
+
+    public void theEndOfGameAlert (Context con){
+        final AlertDialog.Builder alert = new AlertDialog.Builder(con);
+
+        alert.setTitle("Среднее время = сек");
+        alert.setMessage("Перезапустить?");
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                getMethod(START_THE_GAME);
+                dialog.cancel();
+            }
+        });
+
+        alert.setNegativeButton("Ай, нет", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.cancel();
+            }
+        });
+        alert.show();
+    }
+
 }
