@@ -114,11 +114,11 @@ public class MainActivity extends AppCompatActivity{
                         controller.getMethod(bigButton.getCommand());//Do method which name button requesting
                         break;
                     case R.id.settings:
-                        controller.showMenu(MainActivity.this, v);
+                        controller.showMenu(v);
                         break;
                     case R.id.info:
                         //controller.showInfo(INFO_TEXT);
-                        controller.theEndOfGameAlert(MainActivity.this);
+                        controller.theEndOfGameAlert();
                     case R.id.restart:
                         controller.getMethod(START_THE_GAME);
                 }

@@ -10,6 +10,7 @@ import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,9 +27,7 @@ class Controller {
 
     private Chronometer chronometer;
     private long stoppedTime = 0;
-    Context context;
-
-    PopupMenu popup;
+    private Context context;
 
     static final String START = "start";
     static final String STOP = "stop";
@@ -54,6 +53,7 @@ class Controller {
      * session automatically get the right size
      */
     Controller(Context context, Chronometer chronometer, ArrayList<TextView> timeList, HashMap<String, TextView> valueTextMap, ImageButton imageButton) {
+        this.context = context;
         this.chronometer = chronometer;
         this.timeList = timeList;
         this.valueTextMap = valueTextMap;
@@ -75,8 +75,8 @@ class Controller {
                 session.addTime(sec);
                 getMethod(SHOW_TIMES);
                 getMethod(SHOW_AVERAGE_AND_LEFT_TIME);
-                if(session.leftTime()<=0)getMethod(LOOSER);
-                if(session.isEnds)getMethod(END_OF_GAME);
+                if (session.leftTime() <= 0) getMethod(LOOSER);
+                if (session.isEnds) getMethod(END_OF_GAME);
                 break;
             case RESUME:
                 chronometer.setBase(SystemClock.elapsedRealtime() + stoppedTime);
@@ -112,19 +112,19 @@ class Controller {
         }
     }
 
-    void showMenu(Context con, View v) {
-        popup = new PopupMenu(con, v);
+    void showMenu(View v) {
+        PopupMenu popup = new PopupMenu(context, v);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.main, popup.getMenu());
         popup.show();
     }
 
-    void showInfo(String infoText) {
+    /*void showInfo(String infoText) {
 
-    }
+    }*/
 
-    public void theEndOfGameAlert (Context con){
-        final AlertDialog.Builder alert = new AlertDialog.Builder(con);
+    void theEndOfGameAlert() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(context);
 
         alert.setTitle("Среднее время = сек");
         alert.setMessage("Перезапустить?");
