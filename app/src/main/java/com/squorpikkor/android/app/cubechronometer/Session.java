@@ -84,7 +84,7 @@ class Session {
     }
 
     double simpleAverage() {
-        return summa() / timeList.size();
+        return summa() == 0 ? 0 : summa() / timeList.size();
     }
 
     private double simpleAverage(ArrayList<Double> list) {

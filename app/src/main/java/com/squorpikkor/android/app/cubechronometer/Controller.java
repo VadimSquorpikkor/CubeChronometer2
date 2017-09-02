@@ -38,7 +38,7 @@ class Controller {
     private static final String END_OF_GAME = "end_of_game";
     private static final String SHOW_AVERAGE_AND_LEFT_TIME = "show_values";
     static final String START_THE_GAME = "start_the_game";
-    private static final String LOOSER = "looser";
+    static final String LOOSER = "looser";
     private static final String RECORD = "record";
 
     private Session session;
@@ -96,16 +96,19 @@ class Controller {
             case START_THE_GAME:
                 imageButton.setEnabled(true);
                 session = new Session(context, timeList.size());
+                getMethod(SHOW_TIMES);
+                getMethod(SHOW_AVERAGE_AND_LEFT_TIME);
                 break;
             case SHOW_AVERAGE_AND_LEFT_TIME:
                 translator.valueToText(session.simpleAverage(), valueTextMap.get(AVERAGE_TIME));
                 translator.valueToText(session.leftTime(), valueTextMap.get(LEFT_TIME));
                 break;
             case LOOSER:
-
+                okAlert(R.string.looser_message);
+                getMethod(END_OF_GAME);
                 break;
             case RECORD:
-
+                okAlert(R.string.new_best_average);
                 break;
 
 
@@ -119,24 +122,42 @@ class Controller {
         popup.show();
     }
 
-    /*void showInfo(String infoText) {
+    void showInfo(int infoText) {
+        okAlert(infoText);
+    }
 
-    }*/
 
-    void theEndOfGameAlert() {
+    void restartAlert() {
+        okCancelAlert(R.string.restart, START_THE_GAME);
+    }
+
+    private void okAlert(int message) {
         final AlertDialog.Builder alert = new AlertDialog.Builder(context);
 
-        alert.setTitle("Среднее время = сек");
-        alert.setMessage("Перезапустить?");
+        alert.setMessage(message);
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                getMethod(START_THE_GAME);
                 dialog.cancel();
             }
         });
 
-        alert.setNegativeButton("Ай, нет", new DialogInterface.OnClickListener() {
+        alert.show();
+    }
+
+    private void okCancelAlert(int message, final String command) {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(context);
+
+        alert.setMessage(message);
+
+        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                getMethod(command);
+                dialog.cancel();
+            }
+        });
+
+        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.cancel();
             }

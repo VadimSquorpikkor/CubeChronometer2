@@ -17,5 +17,11 @@
     <string name="leftTime">Макс. время</string>
     <string name="_50_2">50</string>
     <string name="button">button</string>
-    <string name="info_text_for_10_times">text</string>
+    <string name="info_text_for_10_times">Здесь будет какой-то текст</string>
+    <string name="zero_value">-</string>
+    <string name="looser_message">Поздравляю, ты - Лощара!</string>
+    <string name="restart">Перезапустить?</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Ай, нет</string>
+    <string name="new_best_average">Поздравляю! Новый рекорд среднего времени!</string>
 </resources>

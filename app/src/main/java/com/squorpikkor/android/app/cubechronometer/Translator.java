@@ -11,10 +11,22 @@ import java.util.ArrayList;
 
 class Translator{
 
-    void arrayToText(ArrayList<Double> fromArray, ArrayList<TextView> toTextView) {
+    /*void arrayToText(ArrayList<Double> fromArray, ArrayList<TextView> toTextView) {
         int count = 0;
         for (Double d : fromArray) {
             toTextView.get(count).setText(String.valueOf(d));
+            count++;
+        }
+    }*/
+
+    void arrayToText(ArrayList<Double> fromArray, ArrayList<TextView> toTextView) {
+        int count = 0;
+        for (TextView text : toTextView) {
+            if (fromArray.size() <= count) {
+                text.setText(R.string.zero_value);
+            } else {
+                text.setText(String.valueOf(fromArray.get(count)));
+            }
             count++;
         }
     }

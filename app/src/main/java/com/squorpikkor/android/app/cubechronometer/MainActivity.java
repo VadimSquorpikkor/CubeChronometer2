@@ -1,7 +1,5 @@
 package com.squorpikkor.android.app.cubechronometer;
 
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -16,8 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.squorpikkor.android.app.cubechronometer.BigButton.BLUE;
+import static com.squorpikkor.android.app.cubechronometer.Controller.LOOSER;
 import static com.squorpikkor.android.app.cubechronometer.Controller.PAUSE;
-import static com.squorpikkor.android.app.cubechronometer.Controller.START_THE_GAME;
 import static com.squorpikkor.android.app.cubechronometer.Session.AVERAGE_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.BEST_AVERAGE_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.BEST_TIME;
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity{
 
     public static final String TAG = "LOG!!";
 
-    final String INFO_TEXT = "@string/info_text_for_10_times";//!!!!!sdelat
+//    final String INFO_TEXT = MainActivity.this.getResources().getString(R.string.info_text_for_10_times);
 
     ArrayList<TextView> timeTextList;
     ArrayList<TextView> valueTextList;
@@ -115,12 +113,14 @@ public class MainActivity extends AppCompatActivity{
                         break;
                     case R.id.settings:
                         controller.showMenu(v);
+//                        controller.getMethod(LOOSER);
                         break;
                     case R.id.info:
-                        //controller.showInfo(INFO_TEXT);
-                        controller.theEndOfGameAlert();
+                        controller.showInfo(R.string.info_text_for_10_times);
+                        break;
                     case R.id.restart:
-                        controller.getMethod(START_THE_GAME);
+                        controller.restartAlert();
+                        break;
                 }
             }
         };
