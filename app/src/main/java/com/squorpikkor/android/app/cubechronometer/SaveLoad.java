@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Класс состот из мапа <String, SharedPreferences>. который хранит ссылки на префы, я его использую
  */
 
-class SaveLoad implements ICanSave {
+class SaveLoad{
 
     private final String SAVE_FIELD = "setting";
     //    private HashMap<String, SharedPreferences> prefList = new HashMap<>();
@@ -34,28 +34,34 @@ class SaveLoad implements ICanSave {
      * P.S. Другой вариант класса -- можно было бы использовать коллекцию для хранения ссылок
      */
 
-    @Override
     public void saveStringArray(ArrayList<String> list, String prefName) {
         preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
         saveStringArray(list, preferences);
     }
 
-    @Override
     public void loadStringArray(ArrayList<String> list, String prefName) {
         preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
         loadStringArray(list, preferences);
     }
 
-    @Override
     public void saveDoubleArray(ArrayList<Double> list, String prefName) {
         preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
         saveDoubleArray(list, preferences);
     }
 
-    @Override
     public void loadDoubleArray(ArrayList<Double> list, String prefName) {
         preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
         loadDoubleArray(list, preferences);
+    }
+
+    void saveDouble(double d, String prefName) {
+        preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
+        saveDouble(d, preferences);
+    }
+
+    double loadDouble(String prefName) {
+        preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
+        return loadDouble(preferences);
     }
 
     /**
@@ -130,5 +136,23 @@ class SaveLoad implements ICanSave {
         }
     }
 
+    private void saveDouble(double d, SharedPreferences sPref) {
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putFloat(SAVE_FIELD, (float)d);
+        editor.apply();
+    }
+
+    private double loadDouble(SharedPreferences sPref) {
+        double d = 55;
+        if (sPref.contains(SAVE_FIELD)) {
+            d = sPref.getFloat(SAVE_FIELD, 0);
+        }
+        return d;
+    }
+
+    /*private double loadDouble(SharedPreferences sPref) {
+
+        return 44;
+    }*/
 
 }

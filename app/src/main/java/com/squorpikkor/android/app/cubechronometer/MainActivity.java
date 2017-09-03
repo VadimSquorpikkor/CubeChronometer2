@@ -2,9 +2,7 @@ package com.squorpikkor.android.app.cubechronometer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.PopupMenu;
 import android.util.Log;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
@@ -14,8 +12,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.squorpikkor.android.app.cubechronometer.BigButton.BLUE;
-import static com.squorpikkor.android.app.cubechronometer.Controller.LOOSER;
+import static com.squorpikkor.android.app.cubechronometer.BigButton.RED;
 import static com.squorpikkor.android.app.cubechronometer.Controller.PAUSE;
+import static com.squorpikkor.android.app.cubechronometer.Controller.RESTART_ALERT;
+import static com.squorpikkor.android.app.cubechronometer.Controller.START_THE_GAME;
+import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.LOAD_HISTORY;
 import static com.squorpikkor.android.app.cubechronometer.Session.AVERAGE_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.BEST_AVERAGE_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.BEST_TIME;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity{
     HashMap<String, TextView> valueTextMap;
 
     Chronometer chronometer;
+//    SaveLoadController saveLoadController;
 
     ImageButton imageButton;
     ImageButton settingsButton;
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onPause() {
         super.onPause();
 
-        if (bigButton.getCondition().equals(BLUE)) {
+        if (bigButton.getCondition().equals(RED)) {
             bigButton.freezeIt(imageButton);
             controller.getMethod(PAUSE);
         }
@@ -101,6 +103,10 @@ public class MainActivity extends AppCompatActivity{
         valueTextMap.put(LEFT_TIME, (TextView)findViewById(R.id.left_time_value));
 
         controller = new Controller(this, chronometer, timeTextList, valueTextMap, imageButton);
+//        saveLoadController = new SaveLoadController(this);
+
+        controller.getMethod(LOAD_HISTORY);
+        controller.getMethod(START_THE_GAME);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -119,7 +125,7 @@ public class MainActivity extends AppCompatActivity{
                         controller.showInfo(R.string.info_text_for_10_times);
                         break;
                     case R.id.restart:
-                        controller.restartAlert();
+                        controller.getMethod(RESTART_ALERT);
                         break;
                 }
             }
@@ -129,13 +135,6 @@ public class MainActivity extends AppCompatActivity{
         settingsButton.setOnClickListener(listener);
         infoButton.setOnClickListener(listener);
         restartButton.setOnClickListener(listener);
-    }
-
-    public void showMenu(View v) {
-        PopupMenu popup = new PopupMenu(this, v);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.main, popup.getMenu());
-        popup.show();
     }
 
 

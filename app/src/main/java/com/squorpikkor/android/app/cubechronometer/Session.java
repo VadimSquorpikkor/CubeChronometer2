@@ -63,7 +63,7 @@ class Session {
     Session(Context context, int size) {
         //this.name = name;
         sessionSize = size;
-        iCanSave = new SaveLoad(context);
+//        iCanSave = new SaveLoad(context);
         this.context = context;
     }
 

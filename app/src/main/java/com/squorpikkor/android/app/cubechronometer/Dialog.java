@@ -8,17 +8,14 @@ import android.support.v7.app.AlertDialog;
  * Created by VadimSquorpikkor on 31.08.2017.
  *
  */
-public class Dialog {
+class Dialog {
 
     private Context context;
-    private String alertCommand;
+    private Controller controller;
 
-    public String getAlertCommand() {
-        return alertCommand;
-    }
-
-    public Dialog(Context context) {
+    Dialog(Context context, Controller controller) {
         this.context = context;
+        this.controller = controller;
     }
 
     void okAlert(int message) {
@@ -42,7 +39,9 @@ public class Dialog {
 
         alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                alertCommand = command;
+//                alertCommand = command;
+
+                controller.getMethod(command);
                 dialog.cancel();
             }
         });
