@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.LOAD_HISTORY;
+import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.LOAD_SESSION;
 import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.SAVE_HISTORY;
+import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.SAVE_SESSION;
 import static com.squorpikkor.android.app.cubechronometer.Session.AVERAGE_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.BEST_AVERAGE_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.BEST_TIME;
@@ -44,7 +46,7 @@ class Controller {
     private static final String SAVE_HISTORY_AND_SET_BEST_TIME = "save_history_and_set_best_time";
     static final String RESTART_ALERT = "restart_alert";
     static final String START_THE_GAME = "start_the_game";
-    static final String SHOW_BEST_AVARAGE_AND_BEST_TIME = "show_best_average_and_best_time";
+    private static final String SHOW_BEST_AVERAGE_AND_BEST_TIME = "show_best_average_and_best_time";
     private static final String LOOSER = "looser";
     private static final String RECORD = "record";
     private static final String BEST_TIME_ALERT = "best_time_alert";
@@ -73,7 +75,7 @@ class Controller {
         this.imageButton = imageButton;
         dialog = new Dialog(context, this);
         gameHistory = new GameHistory();
-        saveLoadController = new SaveLoadController(context, gameHistory);
+        saveLoadController = new SaveLoadController(context, gameHistory, session);
     }
 
     void getMethod(String command) {
@@ -114,13 +116,13 @@ class Controller {
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 getMethod(SHOW_TIMES);
                 getMethod(SHOW_AVERAGE_AND_LEFT_TIME);
-                getMethod(SHOW_BEST_AVARAGE_AND_BEST_TIME);
+                getMethod(SHOW_BEST_AVERAGE_AND_BEST_TIME);
                 break;
             case SHOW_AVERAGE_AND_LEFT_TIME:
                 translator.valueToText(session.simpleAverage(), valueTextMap.get(AVERAGE_TIME));
                 translator.valueToText(session.leftTime(), valueTextMap.get(LEFT_TIME));
                 break;
-            case SHOW_BEST_AVARAGE_AND_BEST_TIME:
+            case SHOW_BEST_AVERAGE_AND_BEST_TIME:
                 translator.valueToText(gameHistory.getBestTime(), valueTextMap.get(BEST_TIME));
                 translator.valueToText(gameHistory.getBestAverageTen(), valueTextMap.get(BEST_AVERAGE_TIME));
                 break;
@@ -137,7 +139,7 @@ class Controller {
                 break;
             case BEST_TIME_ALERT:
                 dialog.okCancelAlert(R.string.new_best_time, SAVE_HISTORY_AND_SET_BEST_TIME);
-                getMethod(SHOW_BEST_AVARAGE_AND_BEST_TIME);
+                getMethod(SHOW_BEST_AVERAGE_AND_BEST_TIME);
                 break;
             case SAVE_HISTORY:
                 saveLoadController.getMethod(SAVE_HISTORY);
@@ -148,6 +150,12 @@ class Controller {
             case SAVE_HISTORY_AND_SET_BEST_TIME:
                 getMethod(SAVE_HISTORY);
                 gameHistory.setBestTime(sec);
+                break;
+            case SAVE_SESSION:
+                saveLoadController.getMethod(SAVE_SESSION);
+                break;
+            case LOAD_SESSION:
+                saveLoadController.getMethod(LOAD_SESSION);
                 break;
 
 

@@ -23,6 +23,38 @@ class Session {
         this.wishTime = wishTime;
     }
 
+    public double getSlowest() {
+        return slowest;
+    }
+
+    public void setSlowest(double slowest) {
+        this.slowest = slowest;
+    }
+
+    public double getFastest() {
+        return fastest;
+    }
+
+    public void setFastest(double fastest) {
+        this.fastest = fastest;
+    }
+
+    public double getSessionSize() {//i done it with double (instead int) course its lazy to make method for int (for double it already done)
+        return sessionSize;
+    }
+
+    public void setSessionSize(double sessionSize) {//i done it with double (instead int) course its lazy to make method for int (for double it already done)
+        this.sessionSize = (int)sessionSize;
+    }
+
+    ArrayList<Double> getTimeList() {
+        return timeList;
+    }
+
+    public void setTimeList(ArrayList<Double> timeList) {
+        this.timeList = timeList;
+    }
+
     static final String BEST_TIME = "best_time";
     static final String BEST_AVERAGE_TIME = "best_average_time";
     static final String AVERAGE_TIME = "average_time";
@@ -30,8 +62,6 @@ class Session {
     static final String WISH_TIME = "wish_time";
     static final String LEFT_TIME = "left_time";
 /*
-    private double bestTime;
-    private double bestSessionTime;
     private double averageTime;
     private double leftTime;
     private double iWishTime;*/
@@ -56,9 +86,9 @@ class Session {
     }
 */
 
-    void saveMe() {
+    /*void saveMe() {
         iCanSave.saveDoubleArray(timeList, String.valueOf(sessionSize));
-    }
+    }*/
 
     Session(Context context, int size) {
         //this.name = name;
@@ -67,13 +97,6 @@ class Session {
         this.context = context;
     }
 
-    /*void resetSession() {
-        for
-    }*/
-
-    ArrayList<Double> getTimeList() {
-        return timeList;
-    }
 
     private double summa() {
         double sum = 0;
@@ -123,10 +146,5 @@ class Session {
         timeList.add(time);
         isEnds = timeList.size() == sessionSize;//if timeList.size() == sessionSize, isEnd = true, else: isEnd = false
     }
-
-    public int getSessionSize() {
-        return sessionSize;
-    }
-
 
 }

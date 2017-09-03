@@ -17,6 +17,8 @@ import static com.squorpikkor.android.app.cubechronometer.Controller.PAUSE;
 import static com.squorpikkor.android.app.cubechronometer.Controller.RESTART_ALERT;
 import static com.squorpikkor.android.app.cubechronometer.Controller.START_THE_GAME;
 import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.LOAD_HISTORY;
+import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.LOAD_SESSION;
+import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.SAVE_SESSION;
 import static com.squorpikkor.android.app.cubechronometer.Session.AVERAGE_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.BEST_AVERAGE_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.BEST_TIME;
@@ -57,6 +59,17 @@ public class MainActivity extends AppCompatActivity{
             bigButton.freezeIt(imageButton);
             controller.getMethod(PAUSE);
         }
+
+        controller.getMethod(SAVE_SESSION);
+        Log.e(TAG, "onPause: SAVE");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        controller.getMethod(LOAD_SESSION);
+        Log.e(TAG, "onResume: LOAD");
     }
 
     @Override
