@@ -5,17 +5,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.util.ArrayList;
-//import java.util.HashMap;
 
 /**
  * Created by VadimSquorpikkor on 22.08.2017.
- * Класс состот из мапа <String, SharedPreferences>. который хранит ссылки на префы, я его использую
+ *
  */
 
 class SaveLoad{
 
     private final String SAVE_FIELD = "setting";
-    //    private HashMap<String, SharedPreferences> prefList = new HashMap<>();
     private Context context;
 
     private SharedPreferences preferences;
@@ -44,14 +42,14 @@ class SaveLoad{
         loadStringArray(list, preferences);
     }
 
-    public void saveDoubleArray(ArrayList<Double> list, String prefName) {
+    void saveDoubleArray(ArrayList<Double> list, String prefName) {
         preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
         saveDoubleArray(list, preferences);
     }
 
-    public void loadDoubleArray(ArrayList<Double> list, String prefName) {
+    ArrayList<Double> loadDoubleArray(String prefName) {
         preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
-        loadDoubleArray(list, preferences);
+        return loadDoubleArray(preferences);
     }
 
     void saveDouble(double d, String prefName) {
@@ -64,35 +62,7 @@ class SaveLoad{
         return loadDouble(preferences);
     }
 
-    /**
-     * Старые методы с использованием HashMap для хранения ссылок на префы
-     * В новой версии методов сохраняю в префы напрямую, минуя мапу
-     */
-    /*@Override
-    public void saveStringArray(ArrayList<String> list, String prefName) {//It should be own class, for better composition -- it can be using in another classes
-        if (!prefList.containsKey(prefName)) {
-            prefList.put(prefName, context.getSharedPreferences(prefName, Context.MODE_PRIVATE));
-        }
-        saveStringArray(list, prefList.get(prefName));
-    }
 
-    @Override
-    public void loadStringArray(ArrayList<String> list, String prefName) {
-        loadStringArray(list, prefList.get(prefName));
-    }
-
-    @Override
-    public void saveDoubleArray(ArrayList<String> list, String prefName) {//It should be own class, for better composition -- it can be using in another classes
-        if (!prefList.containsKey(prefName)) {
-            prefList.put(prefName, context.getSharedPreferences(prefName, Context.MODE_PRIVATE));
-        }
-        saveDoubleArray(list, prefList.get(prefName));
-    }
-
-    @Override
-    public void loadDoubleArray(ArrayList<String> list, String prefName) {
-        loadDoubleArray(list, prefList.get(prefName));
-    }*/
     private void saveStringArray(ArrayList<String> list, SharedPreferences sPref) {//It should be own class, for better composition -- it can be using in another classes
         int count = 0;
         SharedPreferences.Editor editor = sPref.edit();
@@ -126,14 +96,15 @@ class SaveLoad{
         editor.apply();
     }
 
-    private void loadDoubleArray(ArrayList<Double> list, SharedPreferences sPref) {
-        list.clear();
+    private ArrayList<Double> loadDoubleArray(SharedPreferences sPref) {
+        ArrayList<Double> list = new ArrayList<>();
         int count = 0;
         while (sPref.contains(SAVE_FIELD + count)) {
             double d = sPref.getFloat(SAVE_FIELD + count, (float) 0);
             list.add(d);
             count++;
         }
+        return list;
     }
 
     private void saveDouble(double d, SharedPreferences sPref) {
@@ -149,10 +120,5 @@ class SaveLoad{
         }
         return d;
     }
-
-    /*private double loadDouble(SharedPreferences sPref) {
-
-        return 44;
-    }*/
 
 }

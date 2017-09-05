@@ -2,6 +2,7 @@ package com.squorpikkor.android.app.cubechronometer;
 
 import android.content.Context;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Chronometer;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.content.ContentValues.TAG;
 import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.LOAD_HISTORY;
 import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.LOAD_SESSION;
 import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.SAVE_HISTORY;
@@ -70,7 +72,7 @@ class Controller {
         this.chronometer = chronometer;
         this.timeList = timeList;
         this.valueTextMap = valueTextMap;
-        session = new Session(context, timeList.size());
+        session = new Session(timeList.size());
         translator = new Translator();
         this.imageButton = imageButton;
         dialog = new Dialog(context, this);
@@ -94,6 +96,11 @@ class Controller {
                 getMethod(SHOW_AVERAGE_AND_LEFT_TIME);
                 if (session.leftTime() <= 0 && !session.isEnds) getMethod(LOOSER);
                 if (session.isEnds) getMethod(END_OF_GAME);
+                Log.e(TAG, "WISH: " + session.getWishTime());
+                Log.e(TAG, "SLOWEST: " + session.getSlowest());
+                Log.e(TAG, "SESSION SIZE: " + session.getSessionSize());
+                Log.e(TAG, "FASTEST: " + session.getFastest());
+//                Log.e(TAG, "ADVANCED AV: " + session.advancedAverage());//do not workings. Crashes
                 break;
             case RESUME:
                 chronometer.setBase(SystemClock.elapsedRealtime() + stoppedTime);
@@ -112,7 +119,7 @@ class Controller {
                 break;
             case START_THE_GAME:
                 imageButton.setEnabled(true);
-                session = new Session(context, timeList.size());
+                session = new Session(timeList.size());
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 getMethod(SHOW_TIMES);
                 getMethod(SHOW_AVERAGE_AND_LEFT_TIME);

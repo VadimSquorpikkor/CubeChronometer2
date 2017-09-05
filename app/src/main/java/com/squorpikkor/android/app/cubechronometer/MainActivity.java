@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.squorpikkor.android.app.cubechronometer.BigButton.BLUE;
 import static com.squorpikkor.android.app.cubechronometer.BigButton.RED;
 import static com.squorpikkor.android.app.cubechronometer.Controller.PAUSE;
 import static com.squorpikkor.android.app.cubechronometer.Controller.RESTART_ALERT;
