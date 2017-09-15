@@ -3,17 +3,25 @@ package com.squorpikkor.android.app.cubechronometer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.squorpikkor.android.app.cubechronometer.BigButton.RED;
+import static com.squorpikkor.android.app.cubechronometer.Controller.LOG_SESSION;
+import static com.squorpikkor.android.app.cubechronometer.Controller.OPEN_ABOUT_ACTIVITY;
+import static com.squorpikkor.android.app.cubechronometer.Controller.OPEN_HISTORY_ACTIVITY;
 import static com.squorpikkor.android.app.cubechronometer.Controller.PAUSE;
 import static com.squorpikkor.android.app.cubechronometer.Controller.RESTART_ALERT;
+import static com.squorpikkor.android.app.cubechronometer.Controller.SET_WISH_TIME;
+import static com.squorpikkor.android.app.cubechronometer.Controller.SET_WISH_TIME_ALERT;
 import static com.squorpikkor.android.app.cubechronometer.Controller.START_THE_GAME;
 import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.LOAD_HISTORY;
 import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.LOAD_SESSION;
@@ -38,6 +46,8 @@ public class MainActivity extends AppCompatActivity{
     ArrayList<TextView> valueTextList;
     HashMap<String, TextView> valueTextMap;
 
+    TextView chronoTextView;
+
     Chronometer chronometer;
 //    SaveLoadController saveLoadController;
 
@@ -45,6 +55,7 @@ public class MainActivity extends AppCompatActivity{
     ImageButton settingsButton;
     ImageButton infoButton;
     ImageButton restartButton;
+    ImageButton historyButton;
 
     BigButton bigButton;
 
@@ -59,15 +70,16 @@ public class MainActivity extends AppCompatActivity{
             controller.getMethod(PAUSE);
         }
 
-        controller.getMethod(SAVE_SESSION);
+//        controller.getMethod(LOG_SESSION);
         Log.e(TAG, "onPause: SAVE");
+//        controller.getMethod(SAVE_SESSION);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        controller.getMethod(LOAD_SESSION);
+//        controller.getMethod(LOAD_SESSION);
         Log.e(TAG, "onResume: LOAD");
     }
 
@@ -86,6 +98,7 @@ public class MainActivity extends AppCompatActivity{
         infoButton = (ImageButton) findViewById(R.id.info);
         restartButton = (ImageButton) findViewById(R.id.restart);
         settingsButton = (ImageButton) findViewById(R.id.settings);
+        historyButton = (ImageButton) findViewById(R.id.history);
         bigButton = new BigButton();
 
         settingsButton = (ImageButton) findViewById(R.id.settings);
@@ -114,11 +127,15 @@ public class MainActivity extends AppCompatActivity{
         valueTextMap.put(WISH_TIME, (TextView)findViewById(R.id.wish_time_value));
         valueTextMap.put(LEFT_TIME, (TextView)findViewById(R.id.left_time_value));
 
-        controller = new Controller(this, chronometer, timeTextList, valueTextMap, imageButton);
+        chronoTextView = (TextView)findViewById(R.id.chronoTextView);
+
+        controller = new Controller(this, chronometer, timeTextList, valueTextMap, imageButton, chronoTextView, this);
 //        saveLoadController = new SaveLoadController(this);
 
         controller.getMethod(LOAD_HISTORY);
         controller.getMethod(START_THE_GAME);
+//        controller.getMethod(LOAD_SESSION);
+        Log.e(TAG, "onCreate: LOAD");
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -139,6 +156,8 @@ public class MainActivity extends AppCompatActivity{
                     case R.id.restart:
                         controller.getMethod(RESTART_ALERT);
                         break;
+                    case R.id.history:
+                        controller.getMethod(OPEN_HISTORY_ACTIVITY);
                 }
             }
         };
@@ -147,6 +166,37 @@ public class MainActivity extends AppCompatActivity{
         settingsButton.setOnClickListener(listener);
         infoButton.setOnClickListener(listener);
         restartButton.setOnClickListener(listener);
+        historyButton.setOnClickListener(listener);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.e(TAG, "onCreateOptionsMenu: Menu");
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menu_about:
+                Log.e(TAG, "onOptionsItemSelected: ABOUT");
+//                controller.getMethod(OPEN_ABOUT_ACTIVITY);
+                return true;
+            case R.id.menu_restart:
+                controller.getMethod(START_THE_GAME);
+                return true;
+            case R.id.menu_set_average:
+                controller.getMethod(SET_WISH_TIME_ALERT);
+                return true;
+            case R.id.menu_min_time:
+                Log.e(TAG, "onOptionsItemSelected: ABOUT");
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+
     }
 
 

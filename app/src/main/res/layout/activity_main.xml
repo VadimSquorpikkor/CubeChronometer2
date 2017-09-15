@@ -120,6 +120,16 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/history"
+        android:background="@color/grey"
+        android:id="@+id/history"
+        android:layout_alignBottom="@+id/chronometer"
+        android:layout_alignStart="@+id/restart" />
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_replay_white_24dp"
         android:background="@color/grey"
         android:id="@+id/restart"
@@ -202,5 +212,14 @@
             style="@style/result_text" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/chronoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/chronometer"
+        android:layout_alignTop="@+id/restart"
+        android:text="-:-"
+        android:layout_alignEnd="@+id/chronometer" />
 
 </RelativeLayout>

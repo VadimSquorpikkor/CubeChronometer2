@@ -1,6 +1,10 @@
 package com.squorpikkor.android.app.cubechronometer;
 
+import android.util.Log;
+
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Vadim on 20.08.2017.
@@ -12,7 +16,7 @@ class Session {
     private double fastest;
     private int sessionSize;
     boolean isEnds = false;
-    private double wishTime = 50;
+    private double wishTime;
 
     static final String BEST_TIME = "best_time";
     static final String BEST_AVERAGE_TIME = "best_average_time";
@@ -23,9 +27,9 @@ class Session {
 
     private ArrayList<Double> timeList = new ArrayList<>();
 
-    double getWishTime() {
+    /*double getWishTime() {
         return wishTime;
-    }
+    }*/
 
     void setWishTime(double wishTime) {
         this.wishTime = wishTime;
@@ -66,7 +70,8 @@ class Session {
 
 
     Session(int size) {
-        sessionSize = size;
+        this.sessionSize = size;
+        Log.e(TAG, "Session: NEW SESSION CREATED!!!");
     }
 
     private double summa() {
@@ -116,6 +121,12 @@ class Session {
         }
         timeList.add(time);
         isEnds = timeList.size() == sessionSize;//if timeList.size() == sessionSize, isEnd = true, else: isEnd = false
+    }
+
+    void clearSession() {
+        fastest = 0;
+        slowest = 0;
+        timeList.clear();
     }
 
 }

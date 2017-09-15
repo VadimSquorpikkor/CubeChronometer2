@@ -15,9 +15,9 @@ import static com.squorpikkor.android.app.cubechronometer.MainActivity.TAG;
 
 class BigButton {
 
-    public static final String GREEN = "green";
-    public static final String RED = "red";
-    public static final String BLUE = "paused";
+    private static final String GREEN = "green";
+    static final String RED = "red";
+    private static final String BLUE = "paused";
 
     private String command;
 

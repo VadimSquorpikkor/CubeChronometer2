@@ -32,14 +32,23 @@ class SaveLoad{
      * P.S. Другой вариант класса -- можно было бы использовать коллекцию для хранения ссылок
      */
 
+    /*public void saveDoubleStringObj(ArrayList<Double> dList, ArrayList<String> sList, String prefName) {
+        preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
+        saveDoubleArray(dList, preferences);
+        saveStringArray(sList, preferences);
+    }
+
+    public ArrayList<ArrayList<Double>, ArrayList<String>> loadDouble
+    */
+
     public void saveStringArray(ArrayList<String> list, String prefName) {
         preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
         saveStringArray(list, preferences);
     }
 
-    public void loadStringArray(ArrayList<String> list, String prefName) {
+    public ArrayList<String> loadStringArray(String prefName) {
         preferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
-        loadStringArray(list, preferences);
+        return loadStringArray(preferences);
     }
 
     void saveDoubleArray(ArrayList<Double> list, String prefName) {
@@ -74,8 +83,9 @@ class SaveLoad{
         editor.apply();
     }
 
-    private void loadStringArray(ArrayList<String> list, SharedPreferences sPref) {
-        list.clear();
+    private ArrayList<String> loadStringArray(SharedPreferences sPref) {
+        ArrayList<String> list = new ArrayList<>();
+//        list.clear();
         int count = 0;
         while (sPref.contains(SAVE_FIELD + count)) {
             //list.add(SAVE_FIELD + count);
@@ -83,6 +93,7 @@ class SaveLoad{
             list.add(s);
             count++;
         }
+        return list;
     }
 
     private void saveDoubleArray(ArrayList<Double> list, SharedPreferences sPref) {
