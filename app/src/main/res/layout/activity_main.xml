@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Chronometer
+    <!--<Chronometer
         android:id="@+id/chronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         android:textSize="50sp"
         android:layout_above="@+id/linearLayout4"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp" />
+        android:layout_marginBottom="22dp" />-->
 
     <LinearLayout
         android:orientation="horizontal"
@@ -102,9 +102,9 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_info_outline_white_24dp"
         android:background="@color/grey"
-        android:layout_marginEnd="13dp"
+        android:layout_marginEnd="15dp"
         android:id="@+id/info"
-        android:layout_alignBottom="@+id/chronometer"
+        android:layout_alignTop="@+id/chronoTextView"
         android:layout_alignParentEnd="true" />
 
     <ImageButton
@@ -113,9 +113,9 @@
         android:src="@drawable/ic_settings_white_24dp"
         android:background="@color/grey"
         android:id="@+id/settings"
-        android:layout_marginTop="21dp"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignStart="@+id/info" />
+        android:layout_above="@+id/linearLayout4"
+        android:layout_alignStart="@+id/info"
+        android:layout_marginBottom="16dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -123,7 +123,7 @@
         android:src="@drawable/history"
         android:background="@color/grey"
         android:id="@+id/history"
-        android:layout_alignBottom="@+id/chronometer"
+        android:layout_alignTop="@+id/chronoTextView"
         android:layout_alignStart="@+id/restart" />
 
 
@@ -133,9 +133,9 @@
         android:src="@drawable/ic_replay_white_24dp"
         android:background="@color/grey"
         android:id="@+id/restart"
-        android:layout_alignTop="@+id/settings"
+        android:layout_marginStart="31dp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="25dp" />
+        android:layout_alignBottom="@+id/settings" />
 
     <!-- BIG BUTTON -->
     <ImageButton
@@ -215,11 +215,12 @@
 
     <TextView
         android:id="@+id/chronoTextView"
+        android:textSize="50sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/chronometer"
-        android:layout_alignTop="@+id/restart"
         android:text="-:-"
-        android:layout_alignEnd="@+id/chronometer" />
+        android:layout_marginBottom="11dp"
+        android:layout_alignBottom="@+id/settings"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
