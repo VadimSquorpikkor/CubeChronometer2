@@ -2,6 +2,7 @@ package com.squorpikkor.android.app.cubechronometer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -16,8 +17,10 @@ class SquorChrono {
     private Activity activity;
 
     private String s;
-    private long startTime;
-    private long endTime;
+//    private long startTime;
+//    private long endTime;
+    private long elapsedTime;
+
     private boolean stopButtonNotPressed = true;
 
     private int min;
@@ -39,6 +42,7 @@ class SquorChrono {
 
     SquorChrono(TextView textView, Activity activity) {
         this.textView = textView;
+        textView.setText("0:00.0");
         this.activity = activity;
     }
 
@@ -46,7 +50,7 @@ class SquorChrono {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            long startTime = System.currentTimeMillis();
+            long startTime = System.currentTimeMillis() - elapsedTime;//elapsed time is for pause
             while (stopButtonNotPressed) {
                 Log.e("LOGG!!", "Came inside while cycle");
                 try {
@@ -70,15 +74,17 @@ class SquorChrono {
                         }
                     });
 
-                    endTime = System.currentTimeMillis() - startTime;
+//                    endTime = System.currentTimeMillis() - startTime;
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+            elapsedTime = System.currentTimeMillis() - startTime;
         }
     };
 
     void start() {
+        elapsedTime = 0;
         stopButtonNotPressed = true;
         Thread thread = new Thread(runnable);
         thread.start();
@@ -86,6 +92,16 @@ class SquorChrono {
 
     void stop() {
         stopButtonNotPressed = false;
+    }
+
+    void pause() {
+        stopButtonNotPressed = false;
+    }
+
+    void resume() {
+        stopButtonNotPressed = true;
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 
 

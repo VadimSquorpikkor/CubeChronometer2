@@ -21,7 +21,6 @@
         </activity>
         <activity android:name=".HistoryActivity" />
         <activity android:name=".AboutActivity" />
-        <activity android:name=".Main2Activity"></activity>
     </application>
 
 </manifest>

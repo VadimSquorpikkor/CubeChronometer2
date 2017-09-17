@@ -6,26 +6,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Chronometer;
 import android.widget.ImageButton;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.squorpikkor.android.app.cubechronometer.BigButton.RED;
-import static com.squorpikkor.android.app.cubechronometer.Controller.LOG_SESSION;
-import static com.squorpikkor.android.app.cubechronometer.Controller.OPEN_ABOUT_ACTIVITY;
 import static com.squorpikkor.android.app.cubechronometer.Controller.OPEN_HISTORY_ACTIVITY;
 import static com.squorpikkor.android.app.cubechronometer.Controller.PAUSE;
 import static com.squorpikkor.android.app.cubechronometer.Controller.RESTART_ALERT;
-import static com.squorpikkor.android.app.cubechronometer.Controller.SET_WISH_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Controller.SET_WISH_TIME_ALERT;
 import static com.squorpikkor.android.app.cubechronometer.Controller.START_THE_GAME;
 import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.LOAD_HISTORY;
-import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.LOAD_SESSION;
-import static com.squorpikkor.android.app.cubechronometer.SaveLoadController.SAVE_SESSION;
 import static com.squorpikkor.android.app.cubechronometer.Session.AVERAGE_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.BEST_AVERAGE_TIME;
 import static com.squorpikkor.android.app.cubechronometer.Session.BEST_TIME;
@@ -40,16 +33,11 @@ public class MainActivity extends AppCompatActivity{
 
     public static final String TAG = "LOG!!";
 
-//    final String INFO_TEXT = MainActivity.this.getResources().getString(R.string.info_text_for_10_times);
-
     ArrayList<TextView> timeTextList;
     ArrayList<TextView> valueTextList;
     HashMap<String, TextView> valueTextMap;
 
     TextView chronoTextView;
-
-    Chronometer chronometer;
-//    SaveLoadController saveLoadController;
 
     ImageButton imageButton;
     ImageButton settingsButton;
@@ -69,10 +57,6 @@ public class MainActivity extends AppCompatActivity{
             bigButton.freezeIt(imageButton);
             controller.getMethod(PAUSE);
         }
-
-//        controller.getMethod(LOG_SESSION);
-        Log.e(TAG, "onPause: SAVE");
-//        controller.getMethod(SAVE_SESSION);
     }
 
     @Override
@@ -91,8 +75,6 @@ public class MainActivity extends AppCompatActivity{
         timeTextList = new ArrayList<>();
         valueTextList = new ArrayList<>();
         valueTextMap = new HashMap<>();
-
-        chronometer = (Chronometer) findViewById(R.id.chronometer);
 
         imageButton = (ImageButton) findViewById(R.id.imageButton);
         infoButton = (ImageButton) findViewById(R.id.info);
@@ -129,13 +111,12 @@ public class MainActivity extends AppCompatActivity{
 
         chronoTextView = (TextView)findViewById(R.id.chronoTextView);
 
-        controller = new Controller(this, chronometer, timeTextList, valueTextMap, imageButton, chronoTextView, this);
+        controller = new Controller(this, timeTextList, valueTextMap, imageButton, chronoTextView, this);
 //        saveLoadController = new SaveLoadController(this);
 
         controller.getMethod(LOAD_HISTORY);
         controller.getMethod(START_THE_GAME);
 //        controller.getMethod(LOAD_SESSION);
-        Log.e(TAG, "onCreate: LOAD");
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override

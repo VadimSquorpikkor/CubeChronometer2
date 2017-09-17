@@ -35,10 +35,7 @@ import static com.squorpikkor.android.app.cubechronometer.Session.WISH_TIME;
 
 class Controller {
 
-    private Chronometer chronometer;
-    private long stoppedTime = 0;
     private Context context;
-//    private long sec;
     private double sec;
 
     static final String START = "start";
@@ -79,9 +76,8 @@ class Controller {
      * session automatically get the right size
      */
 
-    Controller(Context context, Chronometer chronometer, ArrayList<TextView> timeList, HashMap<String, TextView> valueTextMap, ImageButton imageButton, TextView textView, Activity activity) {
+    Controller(Context context, ArrayList<TextView> timeList, HashMap<String, TextView> valueTextMap, ImageButton imageButton, TextView textView, Activity activity) {
         this.context = context;
-        this.chronometer = chronometer;
         this.timeList = timeList;
         this.valueTextMap = valueTextMap;
         session = new Session(timeList.size());
@@ -96,32 +92,8 @@ class Controller {
     void getMethod(String command) {
         switch (command) {
             case START:
-//                chronometer.setBase(SystemClock.elapsedRealtime());
-//                chronometer.start();
                 squorChrono.start();
                 break;
-
-            /**
-             * for old chronometer
-             */
-
-            /*case STOP:
-                chronometer.stop();
-                long elapsedMillis = SystemClock.elapsedRealtime() - chronometer.getBase();
-                sec = (elapsedMillis / 1000);
-                session.addTime(sec);
-                if (sec < gameHistory.getBestTime()) getMethod(BEST_TIME_ALERT);
-                getMethod(SHOW_TIMES);
-                getMethod(SHOW_AVERAGE_AND_LEFT_TIME);
-                if (session.leftTime() <= 0 && !session.isEnds) getMethod(LOOSER);
-                if (session.isEnds) getMethod(END_OF_GAME);
-                Log.e(TAG, "stop WISH: " + gameHistory.getWishTime());
-                Log.e(TAG, "stop SLOWEST: " + session.getSlowest());
-                Log.e(TAG, "stop SESSION SIZE: " + session.getSessionSize());
-                Log.e(TAG, "stop FASTEST: " + session.getFastest());
-//                Log.e(TAG, "ADVANCED AV: " + session.advancedAverage());//do not workings. Crashes
-                squorChrono.stop();
-                break;*/
             case STOP:
                 squorChrono.stop();
                 sec = squorChrono.getTimeInSeconds();
@@ -138,13 +110,10 @@ class Controller {
 //                Log.e(TAG, "ADVANCED AV: " + session.advancedAverage());//do not workings. Crashes
                 break;
             case RESUME:
-                chronometer.setBase(SystemClock.elapsedRealtime() + stoppedTime);
-                chronometer.start();
+                squorChrono.resume();
                 break;
             case PAUSE:
-//                stoppedTime = chronometer.getBase() - SystemClock.elapsedRealtime();
-//                chronometer.stop();
-//                stoppedTime =
+                squorChrono.pause();
                 break;
             case SHOW_TIMES:
                 translator.arrayToText(session.getTimeList(), timeList);
@@ -166,7 +135,6 @@ class Controller {
                 session.setWishTime(gameHistory.getWishTime());//KOSTYIL:((((
 //                session = new Session(timeList.size());
 //                saveLoadController = new SaveLoadController(context, gameHistory, session);
-//                chronometer.setBase(SystemClock.elapsedRealtime());
                 getMethod(SHOW_TIMES);
                 getMethod(SHOW_AVERAGE_AND_LEFT_TIME);
                 getMethod(SHOW_BEST_AVERAGE_AND_BEST_TIME);
