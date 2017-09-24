@@ -3,11 +3,9 @@ package com.squorpikkor.android.app.cubechronometer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -45,7 +43,7 @@ class Controller {
 
     private static final String SHOW_TIMES = "show_times";
     private static final String END_OF_GAME = "end_of_game";
-    private static final String SHOW_AVERAGE_AND_LEFT_TIME = "show_values";
+    private static final String SHOW_AVERAGE_LEFT_AND_WISH_TIME = "show_values";
     private static final String SAVE_HISTORY_AND_SET_BEST_TIME = "save_history_and_set_best_time";
     static final String RESTART_ALERT = "restart_alert";
     static final String START_THE_GAME = "start_the_game";
@@ -58,6 +56,7 @@ class Controller {
     private static final String LOOSER = "looser";
     private static final String RECORD = "record";
     private static final String BEST_TIME_ALERT = "best_time_alert";
+    private static final String ADD_LINE_TO_HISTORY_LIST = "add_line_to_history_list";
 
     private Intent intent;
     private Session session;
@@ -100,7 +99,7 @@ class Controller {
                 session.addTime(sec);
                 if (sec < gameHistory.getBestTime()) getMethod(BEST_TIME_ALERT);
                 getMethod(SHOW_TIMES);
-                getMethod(SHOW_AVERAGE_AND_LEFT_TIME);
+                getMethod(SHOW_AVERAGE_LEFT_AND_WISH_TIME);
                 if (session.leftTime() <= 0 && !session.isEnds) getMethod(LOOSER);
                 if (session.isEnds) getMethod(END_OF_GAME);
                 Log.e(TAG, "stop WISH: " + gameHistory.getWishTime());
@@ -136,12 +135,13 @@ class Controller {
 //                session = new Session(timeList.size());
 //                saveLoadController = new SaveLoadController(context, gameHistory, session);
                 getMethod(SHOW_TIMES);
-                getMethod(SHOW_AVERAGE_AND_LEFT_TIME);
+                getMethod(SHOW_AVERAGE_LEFT_AND_WISH_TIME);
                 getMethod(SHOW_BEST_AVERAGE_AND_BEST_TIME);
                 break;
-            case SHOW_AVERAGE_AND_LEFT_TIME:
+            case SHOW_AVERAGE_LEFT_AND_WISH_TIME:
                 translator.valueToText(session.simpleAverage(), valueTextMap.get(AVERAGE_TIME));
                 translator.valueToText(session.leftTime(), valueTextMap.get(LEFT_TIME));
+                translator.valueToText(session.getWishTime(), valueTextMap.get(WISH_TIME));
                 break;
             case SHOW_BEST_AVERAGE_AND_BEST_TIME:
                 translator.valueToText(gameHistory.getBestTime(), valueTextMap.get(BEST_TIME));
@@ -189,7 +189,9 @@ class Controller {
                 Log.e(TAG, "getMethod: " + session.getTimeList().get(0));
                 break;*/
             case OPEN_HISTORY_ACTIVITY:
+                Log.e(TAG, "GAME_HISTORY size = " + gameHistory.stringHistoryTen().size());
                 intent = new Intent(context, HistoryActivity.class);
+                intent.putExtra("game_list", gameHistory.stringHistoryTen());
                 context.startActivity(intent);
                 break;
             case OPEN_ABOUT_ACTIVITY:
@@ -204,6 +206,12 @@ class Controller {
                 gameHistory.setWishTime(d);
                 session.setWishTime(d);
                 translator.valueToText(gameHistory.getWishTime(), valueTextMap.get(WISH_TIME));
+                saveLoadController.getMethod(SAVE_HISTORY);
+                Log.e(TAG, gameHistory.getWishTime()+"");
+                break;
+            /*case ADD_LINE_TO_HISTORY_LIST:
+                gameHistory.addGameHistoryTen();
+                break;*/
         }
     }
 

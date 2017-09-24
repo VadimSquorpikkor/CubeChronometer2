@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity{
     ImageButton infoButton;
     ImageButton restartButton;
     ImageButton historyButton;
+    TextView wishTimeButton;
 
     BigButton bigButton;
 
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity{
         restartButton = (ImageButton) findViewById(R.id.restart);
         settingsButton = (ImageButton) findViewById(R.id.settings);
         historyButton = (ImageButton) findViewById(R.id.history);
+        wishTimeButton = (TextView)findViewById(R.id.wish_time_value);
         bigButton = new BigButton();
 
         settingsButton = (ImageButton) findViewById(R.id.settings);
@@ -116,6 +118,7 @@ public class MainActivity extends AppCompatActivity{
 
         controller.getMethod(LOAD_HISTORY);
         controller.getMethod(START_THE_GAME);
+//        Log.e(TAG, "onCreate: gameHistory:" + controller.getMethod(););
 //        controller.getMethod(LOAD_SESSION);
 
         View.OnClickListener listener = new View.OnClickListener() {
@@ -139,6 +142,10 @@ public class MainActivity extends AppCompatActivity{
                         break;
                     case R.id.history:
                         controller.getMethod(OPEN_HISTORY_ACTIVITY);
+                        break;
+                    case R.id.wish_time_value:
+                        controller.getMethod(SET_WISH_TIME_ALERT);
+                        break;
                 }
             }
         };
@@ -148,6 +155,7 @@ public class MainActivity extends AppCompatActivity{
         infoButton.setOnClickListener(listener);
         restartButton.setOnClickListener(listener);
         historyButton.setOnClickListener(listener);
+        wishTimeButton.setOnClickListener(listener);
     }
 
     @Override

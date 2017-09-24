@@ -64,6 +64,14 @@ public class GameHistory {
      */
     ArrayList<Game> historyTen = new ArrayList<>();
 
+    ArrayList<String> stringHistoryTen() {
+        ArrayList<String> list = new ArrayList<>();
+        for (Game game : historyTen) {
+            list.add(game.toString());
+        }
+        return list;
+    }
+
     void addGameHistoryTen(double average) {
         historyTen.add(new Game(average, date));
     }

@@ -3,10 +3,10 @@ package com.squorpikkor.android.app.cubechronometer;
 import android.util.Log;
 import android.widget.ImageButton;
 
+import static android.content.ContentValues.TAG;
 import static com.squorpikkor.android.app.cubechronometer.Controller.RESUME;
 import static com.squorpikkor.android.app.cubechronometer.Controller.START;
 import static com.squorpikkor.android.app.cubechronometer.Controller.STOP;
-import static com.squorpikkor.android.app.cubechronometer.MainActivity.TAG;
 
 /**
  * Created by Vadim on 27.08.2017.

@@ -22,4 +22,11 @@ class Game {
     public String getDate() {
         return date;
     }
+
+    @Override
+    public String toString() {
+        String stringAverage = String.format("%.2f", getAverageTime());
+        String line = getDate() + " -- " + stringAverage;
+        return line;
+    }
 }

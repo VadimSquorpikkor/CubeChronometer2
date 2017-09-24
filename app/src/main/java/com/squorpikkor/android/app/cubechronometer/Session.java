@@ -27,9 +27,9 @@ class Session {
 
     private ArrayList<Double> timeList = new ArrayList<>();
 
-    /*double getWishTime() {
+    double getWishTime() {
         return wishTime;
-    }*/
+    }
 
     void setWishTime(double wishTime) {
         this.wishTime = wishTime;
