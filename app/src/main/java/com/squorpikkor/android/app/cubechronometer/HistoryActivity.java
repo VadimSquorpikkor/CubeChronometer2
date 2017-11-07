@@ -18,9 +18,6 @@ public class HistoryActivity extends AppCompatActivity {
     private static final String TAG = "LOG!!";
     ArrayList<String> gameList;
     ViewConstructor viewConstructor;
-    ArrayList<TextView> textList = new ArrayList<>();
-
-    ArrayList<String> trylist = new ArrayList<>();
     LinearLayout layout;
 
 
@@ -31,29 +28,9 @@ public class HistoryActivity extends AppCompatActivity {
 
         gameList = getIntent().getStringArrayListExtra("game_list");
         layout = (LinearLayout) findViewById(R.id.history_layout);
-//        viewConstructor = new ViewConstructor(this, layout);
+        viewConstructor = new ViewConstructor(this, layout);
 
-        trylist.add("uuu");
-        trylist.add("uuu");
-        trylist.add("uuu");
-
-        Log.e(TAG, "HISTORY_ACTIVITY onCreate: " + gameList.size());
-        createTextViewFromArray(gameList);
-
-
-
-    }
-
-    void createTextViewFromArray(ArrayList<String> list) {
-        for (String s : list) {
-            TextView textView = new TextView(this);
-            textView.setText(s);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                textView.setTextAppearance(R.style.history_text);
-            }
-//            textList.add(textView);
-            layout.addView(textView);
-        }
+        viewConstructor.createTextViewFromArray(gameList);
     }
 
 }

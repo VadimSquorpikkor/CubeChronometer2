@@ -22,19 +22,14 @@ public class ViewConstructor {
 
     }
 
-    /*void createTextViewFromArray(ArrayList<String> list) {
+    void createTextViewFromArray(ArrayList<String> list) {
         for (String s : list) {
             TextView textView = new TextView(context);
             textView.setText(s);
             layout.addView(textView);
         }
-    }*/
-
-    void createTextViewFromArray(ArrayList<String> list) {
-            TextView textView = new TextView(context);
-            textView.setText("jjjjjjjj");
-//            layout.addView(textView);
-            layout.getOrientation();
     }
+
+
 
 }
